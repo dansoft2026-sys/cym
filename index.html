@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursos CyM — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07080a;
+    --surface: #0d0e11;
+    --surface2: #13151a;
+    --border: rgba(255,255,255,0.04);
+    --border-hover: rgba(255,255,255,0.09);
+    --text: #f0f1f4;
+    --text-muted: #858b99;
+    --text-dim: #474b57;
+    --accent: #f0f1f4;
+    --accent-dim: rgba(255,255,255,0.06);
+    --nuevo: #4ade80;
+    --nuevo-dim: rgba(74,222,128,0.08);
+    --radius: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+  }
+
+  html { font-size: 15px; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(7,8,10,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1.5px solid var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text span {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .header-search {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .header-search svg {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+  }
+
+  .header-search input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 0 6px 22px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .header-search input::placeholder { color: var(--text-dim); }
+
+  .header-search input:focus {
+    border-bottom-color: var(--text-muted);
+  }
+
+  .header-stats {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .header-stats strong {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 80px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-desktop {
+    display: block;
+  }
+
+  .sidebar-mobile {
+    display: none;
+  }
+
+  .platform-select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 8px 12px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23858b99' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    transition: border-color 0.15s;
+  }
+
+  .platform-select:focus {
+    border-color: var(--text-muted);
+  }
+
+  .sidebar-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    padding: 0 4px;
+    margin-bottom: 8px;
+  }
+
+  .plat-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 5px 6px;
+    border: none;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .plat-btn:hover {
+    color: var(--text);
+  }
+
+  .plat-btn.active {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .plat-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    opacity: 0.4;
+    transition: all 0.12s;
+  }
+
+  .plat-btn:hover .plat-dot,
+  .plat-btn.active .plat-dot {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  .plat-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .plat-count {
+    font-size: 10.5px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .plat-btn.active .plat-count { color: var(--text-muted); }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main { min-width: 0; }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.75rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-dot-lg {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .section-count-badge {
+    font-size: 10.5px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-dim);
+  }
+
+  /* ── CARD GRID ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0 24px;
+  }
+
+  .card {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    padding: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.15s;
+    cursor: default;
+  }
+
+  .card:hover {
+    border-bottom-color: var(--border-hover);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .nuevo-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: var(--nuevo-dim);
+    color: var(--nuevo);
+    border: 1px solid rgba(74,222,128,0.15);
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .nuevo-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--nuevo);
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .tag-programa { color: #a78bfa; }
+  .tag-bootcamp { color: #fb923c; }
+  .tag-master   { color: #facc15; }
+  .tag-diploma  { color: #f472b6; }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-top: 4px;
+    transition: color 0.12s;
+  }
+
+  .card-link:hover {
+    color: var(--text);
+  }
+
+  .card-link svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    grid-column: 1 / -1;
+    padding: 3rem 1rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .empty svg { margin-bottom: 12px; color: var(--text-dim); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .site-header {
+      padding: 0 1rem;
+    }
+    .header-inner {
+      gap: 0.75rem;
+    }
+    .logo-text span {
+      display: none;
+    }
+    .page {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    .sidebar {
+      position: static;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+    .sidebar-desktop {
+      display: none;
+    }
+    .sidebar-mobile {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .logo-text {
+      display: none;
+    }
+    .header-search {
+      max-width: none;
+    }
+    .header-stats {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">Cursos <span>CyM</span></div>
+    </div>
+    <div class="header-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Buscar cursos, tecnología..." autocomplete="off">
+    </div>
+    <div class="header-stats"><strong id="count">–</strong> cursos</div>
+  </div>
+</header>
+
+<div class="page">
+  <nav class="sidebar" id="sidebar" aria-label="Filtrar por plataforma"></nav>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+const COURSES = [
+  {p:"Galaxy",      t:"Administrator Kubernetes",                                         tipo:"Curso",     tech:"Kubernetes",   nuevo:false, link:"https://drive.google.com/file/d/1BcZcKMLP71Qlyw7_PDJKUeDmNS8LwKO_/view?usp=sharing"},
+  {p:"Galaxy",      t:"Angular Data Manager Applications",                                tipo:"Curso",     tech:"Angular",      nuevo:false, link:"https://drive.google.com/file/d/1bvGlnvl4_naZh2ckBaRbMVOtMXr-1CKd/view?usp=sharing"},
+  {p:"Galaxy",      t:"Java Testing JUnit Mockito",                                       tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1luRj979KZBQ_m8Ap14xaDUbTELhKe2Dl/view?usp=sharing"},
+  {p:"Galaxy",      t:"Spring Batch Integration",                                         tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1zLE5iwjLnoISzlrndctpMjdKH-ayaBM0/view?usp=sharing"},
+  {p:"Galaxy",      t:"QA Software Automation Tester",                                    tipo:"Programa",  tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/14cT6HexUKbmnR_DnFi4vfGLk5MXgVaOH/view?usp=sharing"},
+  {p:"Galaxy",      t:"Onion Architecture con Spring Boot",                               tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1eEcjc3Z2nxxMzMm_BaMAzH6Qp732AaBJ/view?usp=sharing"},
+  {p:"Galaxy",      t:"Microservices Observability — APM, Logs, Tracer & Metrics",       tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1852qFUhU5ZF1JtOv_7WFpAtwbIXMngaj/view?usp=sharing"},
+  {p:"Galaxy",      t:"Spring Modulith",                                                  tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1T-BnW1lTjB5s6VJfrjMcTeRBwc5F4PWh/view?usp=sharing"},
+  {p:"Galaxy",      t:"Domain Design Driven",                                             tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1WeE2_h9TgoOqyr3d_NaNcKmgn7t65YJq/view?usp=sharing"},
+  {p:"Galaxy",      t:"Microservicios EDA, CQRS, SAGA & Kafka",                          tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1Bv1BjFBh1P1fu6WkIMtL5wCLmYqKEYBb/view?usp=sharing"},
+  {p:"Galaxy",      t:"Microservicios Java 21",                                           tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1Bv1BjFBh1P1fu6WkIMtL5wCLmYqKEYBb/view?usp=sharing"},
+  {p:"Galaxy",      t:"Microfront React",                                                 tipo:"Curso",     tech:"React",        nuevo:false, link:"https://drive.google.com/file/d/1X6VM7x30qYpjFb05IEaqO1XHvQJumCrq/view?usp=sharing"},
+  {p:"Galaxy",      t:"Front-End: Angular 19 for Java Developers",                       tipo:"Curso",     tech:"Angular",      nuevo:false, link:"https://drive.google.com/file/d/15JQRm2RmHCKvxsSOwf3QgvRcXXlVilSg/view?usp=sharing"},
+  {p:"Galaxy",      t:"Kafka 2023",                                                       tipo:"Curso",     tech:"Java",         nuevo:false, link:""},
+  {p:"Galaxy",      t:"Arquitectura Hexagonal",                                           tipo:"Curso",     tech:"Java",         nuevo:false, link:""},
+  {p:"Galaxy",      t:"Clean Code",                                                       tipo:"Curso",     tech:"Java",         nuevo:false, link:""},
+  {p:"Galaxy",      t:"Microservicios con Quarkus",                                       tipo:"Curso",     tech:"Quarkus",      nuevo:true,  link:"https://drive.google.com/file/d/1zq_ynRXjtJ73l6i2PjtG4z1KMOweO24g/view?usp=sharing"},
+  {p:"Galaxy",      t:"Programa Java Web Developer",                                      tipo:"Programa",  tech:"Java · Angular",nuevo:true, link:"https://drive.google.com/file/d/1rtM1LGgrwXTBX6ojd_B0t3ZoosaYZvMy/view?usp=sharing"},
+  {p:"Galaxy",      t:"Quarkus Event Driven Kafka",                                       tipo:"Curso",     tech:"Quarkus",      nuevo:true,  link:"https://drive.google.com/file/d/1-rLhE096Uj3-4oj8S1L_8KuvDQmFac3m/view?usp=sharing"},
+  {p:"Galaxy",      t:"Arquitectura BD Políglotas, Operaciones y Continuidad",            tipo:"Curso",     tech:"BD",           nuevo:true,  link:"https://drive.google.com/file/d/1RPabbcjPg7JHLtU7kVTP87bQRTLgraBY/view?usp=sharing"},
+  {p:"Galaxy",      t:"Documentación de Arquitecturas",                                   tipo:"Curso",     tech:"Documentación",nuevo:true,  link:"https://drive.google.com/file/d/1ao4Wf2QcgCG96dLaTzR8NqtXzU0raFff/view?usp=sharing"},
+  {p:"Galaxy",      t:"Java Custom Libraries — Utilities & Starters",                     tipo:"Curso",     tech:"Librerías",    nuevo:true,  link:"https://drive.google.com/file/d/1CSJID8WxwZV9KhjpVlPX-V3JrWRnqrJB/view?usp=sharing"},
+  {p:"Cursos Dev",  t:"Typescript",                                                       tipo:"Curso",     tech:"Javascript",   nuevo:false, link:""},
+  {p:"Cursos Dev",  t:"Microfront",                                                       tipo:"Curso",     tech:"Angular 17",   nuevo:false, link:""},
+  {p:"Cursos Dev",  t:"Javascript Pro",                                                   tipo:"Curso",     tech:"Javascript",   nuevo:false, link:"https://cursos-dev.com/course/javascript-pro-desde-cero"},
+  {p:"Mitocode",    t:"Kafka Java Developer (2025)",                                      tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1950i2U9KBRFk9kDkkpKo-N6mts1Smel2/view?usp=sharing"},
+  {p:"Mitocode",    t:"Arquitectura Hexagonal en Java (2025)",                            tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1Jhhfwj-Z8T61GsdfKal6coD7yOopcQX8/view?usp=sharing"},
+  {p:"Mitocode",    t:"Java Fullstack Developer — Spring Boot + Angular 17",              tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1TrtDXwyHYMKH5LXUEZaGUqsIxoxxIO79/view?usp=sharing"},
+  {p:"Mitocode",    t:"DevOps Arquitect 2024",                                            tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1OE46yg-PC-LgTPfK5cNHYv9cB6xrEOyh/view?usp=sharing"},
+  {p:"Mitocode",    t:"WebFlux 2024",                                                     tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1IHQWvttbBn4po0X5kzvO-VaX5dyRSrBC/view?usp=sharing"},
+  {p:"Mitocode",    t:"Microservicios Spring Cloud 2024",                                 tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1Z1iZ9nhIhuKFf6LgdW5cRer4yAHC6yQh/view?usp=sharing"},
+  {p:"Mitocode",    t:"Spring AI 2024",                                                   tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://mitocode.com/curso/springai/"},
+  {p:"Mitocode",    t:"Evolución Java 2024",                                              tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://mitocode.com/curso/evolucionjava/"},
+  {p:"Mitocode",    t:"Java Testing",                                                     tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://mitocode.com/curso/javatesting/"},
+  {p:"Mitocode",    t:"Angular IA",                                                       tipo:"Curso",     tech:"Angular",      nuevo:true,  link:"https://drive.google.com/file/d/1DJ8gcRmB-gFlSBwFGCIsjJXSn3QXshuG/view?usp=sharing"},
+  {p:"Mitocode",    t:"Arquitecto DevOps & SecOps",                                       tipo:"Curso",     tech:"Java",         nuevo:true,  link:"https://drive.google.com/file/d/1Tvo9TQ669JN-GCF_InkVHCcevvuyL09a/view?usp=sharing"},
+  {p:"Mitocode",    t:"Microservicios Spring Cloud (nuevo)",                              tipo:"Curso",     tech:"Java",         nuevo:true,  link:"https://drive.google.com/file/d/1k9ttxIgqtbnSf1RaxmTtmkSqPrQwR7sR/view?usp=sharing"},
+  {p:"Mitocode",    t:"WebFlux (nuevo)",                                                  tipo:"Curso",     tech:"Java",         nuevo:true,  link:"https://drive.google.com/file/d/1LNuwDeoSJgOLEMe0RC7Xezf6ypHsVG5S/view?usp=sharing"},
+  {p:"Mitocode",    t:"AWS Developer + Observabilidad",                                   tipo:"Curso",     tech:"Java",         nuevo:true,  link:"https://drive.google.com/file/d/1h3w1ID1EC58PBqHl9z83xioTTaIP3uqP/view?usp=sharing"},
+  {p:"Mitocode",    t:"Docker Kubernetes Cloud 2023-I",                                   tipo:"Curso",     tech:"Docker · K8s", nuevo:false, link:""},
+  {p:"Mitocode",    t:"Java Testing (archivo)",                                           tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1GWeuJC5DiWc1Moqdp9skp9Htkt97MlF9/view?usp=sharing"},
+  {p:"Mitocode",    t:"IA para Developers",                                               tipo:"Curso",     tech:"Java",         nuevo:false, link:""},
+  {p:"Laravest",    t:"Sistema de Facturación",                                           tipo:"Curso",     tech:"PHP",          nuevo:true,  link:"https://drive.google.com/file/d/1X9sW6TOWgOUcDLBeS9B4X9A4zokSWPXx/view?usp=sharing"},
+  {p:"Cjava",       t:"Java Expert",                                                      tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1A86fLoYHkqb_9xSo418QKUty9HI09kI3/view?usp=sharing"},
+  {p:"codeArti",    t:"Arquitectura de Microservicios con Spring Boot y Kubernetes",      tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://codearti.com/cursos/arquitectura-de-microservicios-con-spring-boot-y-kubernetes-en-vivo/"},
+  {p:"codeArti",    t:"Arquitectura de Microservicios con Spring Boot y Spring Cloud",    tipo:"Curso",     tech:"Java",         nuevo:false, link:"https://codearti.com/cursos/arquitectura-de-microservicios-con-spring-boot-y-spring-cloud/"},
+  {p:"Tecylab",     t:"AZURE",                                                            tipo:"Curso",     tech:"Azure",        nuevo:false, link:""},
+  {p:"Tecylab",     t:"DevOps Multicloud",                                                tipo:"Curso",     tech:"DevOps",       nuevo:false, link:"https://drive.google.com/file/d/1hnYIDN123cKO9ZenvJyRwN7Z7_vOyrVv/view?usp=sharing"},
+  {p:"Tecylab",     t:"Java Multicloud",                                                  tipo:"Curso",     tech:"Java",         nuevo:false, link:""},
+  {p:"Tecylab",     t:".NET Senior",                                                      tipo:"Curso",     tech:".NET",         nuevo:false, link:""},
+  {p:"Tecylab",     t:"Node",                                                             tipo:"Curso",     tech:"Node.js",      nuevo:false, link:""},
+  {p:"Tecylab",     t:".NET Cloud",                                                       tipo:"Curso",     tech:".NET",         nuevo:true,  link:"https://drive.google.com/file/d/1kqIm4X7S9U8IqmKOfGaUeFZDttcm7uGW/view?usp=sharing"},
+  {p:"Smart Data",  t:"Análisis de Datos con SQL",                                        tipo:"Curso",     tech:"SQL Server",   nuevo:false, link:""},
+  {p:"Smart Data",  t:"Arquitecto de Soluciones Azure",                                   tipo:"Curso",     tech:"Azure",        nuevo:false, link:""},
+  {p:"Smart Data",  t:"DevSecOps",                                                        tipo:"Curso",     tech:"Azure",        nuevo:false, link:""},
+  {p:"Smart Data",  t:"Ingeniería de Datos con Azure Databricks e IA",                   tipo:"Curso",     tech:"Azure",        nuevo:false, link:""},
+  {p:"Smart Data",  t:"Ciencia de Datos con Python",                                      tipo:"Curso",     tech:"Python",       nuevo:false, link:""},
+  {p:"Smart Data",  t:"Arquitecto de Soluciones — AWS",                                   tipo:"Curso",     tech:"AWS",          nuevo:false, link:""},
+  {p:"Smart Data",  t:"G1 — Fundamentos de Cloud, Data y SysOps con AWS",                tipo:"Curso",     tech:"AWS",          nuevo:false, link:""},
+  {p:"Smart Data",  t:"Azure-104",                                                        tipo:"Curso",     tech:"Azure",        nuevo:false, link:""},
+  {p:"Smart Data",  t:"Tech & Data Leader Program",                                       tipo:"Curso",     tech:"Tech Lead",    nuevo:true,  link:""},
+  {p:"Smart Data",  t:"Ing. de Datos e IA Azure",                                         tipo:"Curso",     tech:"Azure",        nuevo:true,  link:""},
+  {p:"Smart Data",  t:"Ing. de Datos e IA AWS",                                           tipo:"Curso",     tech:"AWS",          nuevo:true,  link:""},
+  {p:"Univ. Andres",t:"Creación de empresas — Dirigiendo negocios rentables",             tipo:"Curso",     tech:"Emprendimiento",nuevo:true, link:""},
+  {p:"actumlogos",  t:"LLM",                                                              tipo:"Curso",     tech:"IA",           nuevo:false, link:""},
+  {p:"actumlogos",  t:"Machine Learning en Producción 2023",                              tipo:"Curso",     tech:"IA",           nuevo:false, link:""},
+  {p:"actumlogos",  t:"LLM (2025)",                                                       tipo:"Curso",     tech:"Python",       nuevo:false, link:"https://drive.google.com/file/d/1qW9o3Hi48N3IVu9lYp3f-AbGpjVJ6CjG/view?usp=sharing"},
+  {p:"Código",      t:"Java Fullstack",                                                   tipo:"Bootcamp",  tech:"Java",         nuevo:false, link:"https://drive.google.com/file/d/1MGNZ4GzZ3ytWmDuFOxl_pdqoDLQntT3g/view?usp=sharing"},
+  {p:"Código",      t:"Arquitectura",                                                     tipo:"Bootcamp",  tech:"Java",         nuevo:false, link:"https://codigo.edu.pe/bootcamp/arquitectura-software/"},
+  {p:"Código",      t:"C#",                                                               tipo:"Bootcamp",  tech:".NET",         nuevo:false, link:"https://codigo.edu.pe/bootcamp/desarrollo-web-fullstack-con-c/"},
+  {p:"Código",      t:"Ciencia de Datos",                                                 tipo:"Bootcamp",  tech:"Python",       nuevo:false, link:"https://codigo.edu.pe/bootcamp/data-science/"},
+  {p:"Código",      t:"DevOps",                                                           tipo:"Bootcamp",  tech:"DevOps",       nuevo:false, link:"https://codigo.edu.pe/bootcamp/devops/"},
+  {p:"Código",      t:"Flutter",                                                          tipo:"Bootcamp",  tech:"Flutter",      nuevo:false, link:"https://codigo.edu.pe/bootcamp/desarrollo-movil-con-flutter-elearnig/"},
+  {p:"Código",      t:"Vibe Coding",                                                      tipo:"Bootcamp",  tech:"Vibe Coding",  nuevo:true,  link:"https://drive.google.com/file/d/1lYQGn63fTOO3Xk2B9LSAQGQ7IyR_ibhP/view?usp=sharing"},
+  {p:"Código",      t:"AWS",                                                              tipo:"Bootcamp",  tech:"AWS",          nuevo:true,  link:"https://drive.google.com/file/d/1RrGxwc_CPxCUn58ZYwhN9GjZPi6vphe9/view?usp=sharing"},
+  {p:"Código",      t:"Python Fullstack",                                                 tipo:"Bootcamp",  tech:"Python",       nuevo:true,  link:"https://drive.google.com/file/d/1rPyuW-3dN1bawKL_7Wyhxpn7mQpaxk3L/view?usp=sharing"},
+  {p:"Circulo 7",   t:"Arquitectura Moderna de Servicios en Java",                        tipo:"Programa",  tech:"Java",         nuevo:false, link:"https://circulosiete.com/capacitacion/arquitectura-moderna-java"},
+  {p:"Inglés",      t:"IF12",                                                             tipo:"Curso",     tech:"Inglés",       nuevo:false, link:"https://hotmart.com/es/marketplace/productos/if12-curso-ingles-fluido-en-12-semanas/L79159454D"},
+  {p:"Inglés",      t:"Martinblacutt",                                                    tipo:"Curso",     tech:"Inglés",       nuevo:true,  link:"https://www.martinblacutt.com/"},
+  {p:"Inglés",      t:"Gringo Academy",                                                   tipo:"Curso",     tech:"Inglés",       nuevo:true,  link:"https://hotmart.com/en/marketplace/products/gringo-academy/E98239771D"},
+  {p:"Inglés",      t:"Kokomi",                                                           tipo:"Curso",     tech:"Inglés",       nuevo:false, link:""},
+  {p:"DMC",         t:"Data Science Avanzado (2024)",                                     tipo:"Programa",  tech:"Python",       nuevo:false, link:"https://drive.google.com/file/d/1_9PuYsV_jhsk1l_kADnNDHd0C_mGqWZ1/view?usp=sharing"},
+  {p:"DMC",         t:"Especialización ML y Deep Learning con Python (2022)",             tipo:"Curso",     tech:"Python",       nuevo:false, link:"https://drive.google.com/file/d/1wUO6hpLqPlHqEkoEd4o6V2lzEU4LDpBD/view?usp=sharing"},
+  {p:"DMC",         t:"Diploma Data Architecture (2024)",                                 tipo:"Diploma",   tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1qf9R2H7HbpxSbGUcqlJTxxIvwOeKXsZ9/view?usp=sharing"},
+  {p:"Big School",  t:"Master IA (2024)",                                                 tipo:"Master",    tech:"",             nuevo:false, link:"https://drive.google.com/file/d/15t6Sp2_EJKGv3Naz0V5v3L8b5B2UIziC/view?usp=sharing"},
+  {p:"Big School",  t:"Master Marketing (2025)",                                          tipo:"Master",    tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1ra-qLFFLGVrmBzaRmobmEXDLSYbRwBYq/view?usp=sharing"},
+  {p:"Big School",  t:"Master SEO (2025)",                                                tipo:"Master",    tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1RwIcjwWsOAik04wIJ0A2ulRuKSCkpDdU/view?usp=sharing"},
+  {p:"Big School",  t:"Master IA (2025)",                                                 tipo:"Master",    tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1vN0uCGDTOsDQk6Ohc7ODKV7W-6qLwZAE/view?usp=sharing"},
+  {p:"Datapath",    t:"Creación de Agentes de Voz con IA en Tiempo Real (2025)",         tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1_C2BRTaqYG_RNJOmOq-ItOiawk8eiO-T/view?usp=sharing"},
+  {p:"Datapath",    t:"MLops",                                                            tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1rvpY5Pl0JHiwQBclHJMGEgh8cTO48MM_/view?usp=sharing"},
+  {p:"Datapath",    t:"Datapath AI Engineer",                                             tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1UK7O5-_x649aKPpgKCvBPI4x_gabHC33/view?usp=sharing"},
+  {p:"Datapath",    t:"Talleres de Agentes Inteligentes",                                 tipo:"Talleres",  tech:"",             nuevo:true,  link:"https://drive.google.com/drive/folders/1HadJF1QxktskINhKfDc9ZFd39Rd3JVRX?usp=sharing"},
+  {p:"UTEC",        t:"Programa Arquitectura Digital & Cloud V2 (2025)",                  tipo:"Programa",  tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1tW5THoQQiKLrd3gKNWGw7P_0eJau0Ml4/view?usp=sharing"},
+  {p:"UTEC",        t:"IA Aplicada a la Innovación 2025",                                 tipo:"Curso",     tech:"",             nuevo:false, link:"https://drive.google.com/file/d/16cHl2KlzfM0XNqv1LMIv-mth41wSs4BG/view?usp=sharing"},
+  {p:"Cloudcamp",   t:"DevOps 2024",                                                      tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"Ingeniería de Datos 2024",                                         tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"Terraform 2024",                                                   tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"Docker y Kubernetes 2024",                                         tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"AWS Solutions Architect Associate 2024",                           tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"AWS Solutions Architect Professional 2024",                        tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"AWS Cloud Practitioner 2024",                                      tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"AWS Security 2024",                                                tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"Cloudcamp",   t:"AWS Security Taller 2024",                                         tipo:"Bootcamp",  tech:"",             nuevo:false, link:""},
+  {p:"relief",      t:"Integra: N8N + Kommo + WhatsApp + Facebook + Instagram",           tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1QvxYm6ygCcOPuBlv1Lnk81T4yHTxphkh/view?usp=sharing"},
+  {p:"va360.academy",t:"N8N (2025)",                                                      tipo:"Curso",     tech:"",             nuevo:false, link:"https://drive.google.com/file/d/1gI3r2wrGSQfYP-iB09x2ppF0lKqg9EAz/view?usp=sharing"},
+  {p:"Manuel Zapata",t:"Curso práctico de patrones de arquitectura",                      tipo:"Curso",     tech:"",             nuevo:false, link:"https://manuelzapata.co/cursos/"},
+  {p:"Manuel Zapata",t:"Curso práctico de patrones de diseño",                            tipo:"Curso",     tech:"",             nuevo:false, link:"https://manuelzapata.co/cursos/"},
+  {p:"Manuel Zapata",t:"Principios de diseño",                                            tipo:"Curso",     tech:"",             nuevo:false, link:"https://manuelzapata.co/cursos/"},
+  {p:"Manuel Zapata",t:"Programación profesional con objetos",                            tipo:"Curso",     tech:"",             nuevo:false, link:"https://manuelzapata.co/cursos/"},
+  {p:"PCERTIFICATE",t:"Especialización IA para gerentes de Proyecto",                     tipo:"Curso",     tech:"",             nuevo:false, link:"https://drive.google.com/file/d/19q3ZJTbPNRmRByy7XYS0Mbl1kq3EBmJ5/view?usp=sharing"},
+  {p:"uxcristopher",t:"DesignerPack UX/UI",                                               tipo:"Pack",      tech:"UX/UI",        nuevo:true,  link:"https://www.uxcristopher.com/cursos/designerpack"},
+  {p:"espacioux",   t:"Curso Design System",                                              tipo:"Curso",     tech:"UX/UI",        nuevo:true,  link:"https://www.espacioux.com//curso-design-system"},
+  {p:"Membresías we",t:"Pack Cursos Ofimática, SQL, Power BI",                            tipo:"Pack",      tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1s6qtkZivvV9HuiD7KDvg2rku9LKQlp5f/view?usp=sharing"},
+  {p:"BLUMBIT",     t:"Full Stack",                                                       tipo:"Programa",  tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1o1JvWzMIiKofbaGGPO9K9d0Fxf0f33VR/view?usp=sharing"},
+  {p:"CLOUDNATIVE", t:"2da ed. Azure DevOps y DevSecOps",                                 tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1DnU37dYDd-Pr_B7Iwhh4SQgvqfc5o6Yo/view?usp=sharing"},
+  {p:"CLOUDNATIVE", t:"Adopción DevOps y DevSecOps con Jenkins",                          tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/1P4UF4RwiS2z8ccsiTI3FDm2mRgs94Wbf/view?usp=sharing"},
+  {p:"CLOUDNATIVE", t:"Curso Gitlab",                                                     tipo:"Curso",     tech:"",             nuevo:true,  link:"https://drive.google.com/file/d/16Ag5qvdV3ezHiGKAbTWOVTIU95aD5-jm/view?usp=sharing"},
+];
+
+const COLORS = {
+  "Galaxy":"#4f8ef7","Cursos Dev":"#4ade80","Mitocode":"#f97316","Laravest":"#a78bfa",
+  "Cjava":"#fbbf24","codeArti":"#2dd4bf","Tecylab":"#f472b6","Smart Data":"#60a5fa",
+  "Univ. Andres":"#fb923c","actumlogos":"#94a3b8","Código":"#ef4444","Circulo 7":"#c084fc",
+  "Inglés":"#34d399","DMC":"#f43f5e","Big School":"#e879f9","Datapath":"#818cf8",
+  "UTEC":"#6366f1","Cloudcamp":"#22d3ee","relief":"#4ade80","va360.academy":"#f87171",
+  "Manuel Zapata":"#d1d5db","PCERTIFICATE":"#2dd4bf","uxcristopher":"#a78bfa",
+  "espacioux":"#fb923c","Membresías we":"#fbbf24","BLUMBIT":"#60a5fa","CLOUDNATIVE":"#f472b6"
+};
+
+const PLATFORMS = [...new Set(COURSES.map(c => c.p))];
+
+let active = 'Todos';
+let q = '';
+
+function tipoClass(tipo) {
+  const t = tipo.toLowerCase();
+  if(t.includes('programa')) return 'tag-programa';
+  if(t.includes('bootcamp')) return 'tag-bootcamp';
+  if(t.includes('master'))   return 'tag-master';
+  if(t.includes('diploma'))  return 'tag-diploma';
+  return 'tag-curso';
+}
+
+const extLink = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+function buildSidebar() {
+  const all = ['Todos', ...PLATFORMS];
+  const counts = {};
+  PLATFORMS.forEach(p => counts[p] = COURSES.filter(c => c.p === p).length);
+  
+  const buttonsHtml = all.map(p => {
+    const color = COLORS[p] || '#888';
+    const cnt = p === 'Todos' ? COURSES.length : counts[p];
+    return `<button class="plat-btn${p === active ? ' active' : ''}" data-plat="${p}">
+      <div class="plat-dot" style="background:${p==='Todos'?'var(--accent)':color}"></div>
+      <span class="plat-name">${p}</span>
+      <span class="plat-count">${cnt}</span>
+    </button>`;
+  }).join('');
+
+  const optionsHtml = all.map(p => {
+    const cnt = p === 'Todos' ? COURSES.length : counts[p];
+    return `<option value="${p}" ${p === active ? 'selected' : ''}>${p} (${cnt})</option>`;
+  }).join('');
+
+  return `
+    <div class="sidebar-desktop">
+      <div class="sidebar-label">Plataformas</div>
+      ${buttonsHtml}
+    </div>
+    <div class="sidebar-mobile">
+      <select id="platform-select" class="platform-select" aria-label="Filtrar por plataforma">
+        ${optionsHtml}
+      </select>
+    </div>
+  `;
+}
+
+function render() {
+  const ql = q.toLowerCase();
+  const filtered = COURSES.filter(c => {
+    const matchP = active === 'Todos' || c.p === active;
+    const matchQ = !ql || c.t.toLowerCase().includes(ql) || c.tech.toLowerCase().includes(ql) || c.p.toLowerCase().includes(ql);
+    return matchP && matchQ;
+  });
+
+  document.getElementById('count').textContent = filtered.length;
+
+  const byPlat = {};
+  filtered.forEach(c => { (byPlat[c.p] = byPlat[c.p]||[]).push(c); });
+
+  const main = document.getElementById('main');
+
+  if(filtered.length === 0) {
+    main.innerHTML = `<div class="empty">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6"/></svg>
+      <p>Sin resultados para "<strong>${q}</strong>"</p>
+    </div>`;
+    return;
+  }
+
+  main.innerHTML = Object.entries(byPlat).map(([plat, courses]) => {
+    const color = COLORS[plat] || '#888';
+    return `<div class="section">
+      <div class="section-header">
+        <div class="section-dot-lg" style="background:${color}"></div>
+        <span class="section-name">${plat}</span>
+        <span class="section-count-badge">${courses.length}</span>
+      </div>
+      <div class="cards">
+        ${courses.map(c => `
+          <div class="card">
+            <div class="card-top">
+              <span class="card-title">${c.t}</span>
+              ${c.nuevo ? `<span class="nuevo-pill"><span class="nuevo-dot"></span>Nuevo</span>` : ''}
+            </div>
+            <div class="card-tags">
+              <span class="tag ${tipoClass(c.tipo)}">${c.tipo}</span>
+              ${c.tech ? `<span class="tag">${c.tech}</span>` : ''}
+            </div>
+            ${c.link ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">${extLink} Ver recurso</a>` : ''}
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('sidebar').innerHTML = buildSidebar();
+  
+  // Event listeners para los botones de escritorio
+  document.querySelectorAll('.plat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      active = btn.dataset.plat;
+      render();
+    });
+  });
+
+  // Event listener para el selector móvil (dropdown)
+  const mobileSelect = document.getElementById('platform-select');
+  if (mobileSelect) {
+    mobileSelect.addEventListener('change', e => {
+      active = e.target.value;
+      render();
+    });
+  }
+}
+
+document.getElementById('search').addEventListener('input', e => {
+  q = e.target.value;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
